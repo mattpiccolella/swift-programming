@@ -5,20 +5,20 @@ This document represents the notes I took while learning Swift.
 
 Constants use `let`, values use `var`:
 
-```
+```swift
 var myVariable = 62
 let myConstant = 84
 ```
 
 We can assign specific, non-inferred types:
 
-```
+```swift
 var myDouble: Double = 65.0
 ```
 
 Casting using types:
 
-```
+```swift
 // First Way
 let width = 54
 let widthLabel = String(width)
@@ -29,7 +29,7 @@ let widthString = "The width of the string is \(width)"
 
 Arrays and dictionaries using brackets:
 
-```
+```swift
 var shoppingList = ["eggs", "milk", "butter"]
 var jobs = [
     "Kanye West" : "Rapper",
@@ -40,20 +40,20 @@ jobs["Kanye West"] // "Rapper"
 
 Or we can initialize:
 
-```
+```swift
 let emptyArray = String[]()
 let emptyDictionary = Dictionary<String,Float>()
 ```
 
 Optionals make sure we don't need to do checks for nil:
 
-```
+```swift
 var optionalName: String? = "Matt Piccolella"
 ```
 
 Iterating over dictionaries is easy:
 
-```
+```swift
 let patterns = [
     "Fibonacci": [1,1,2,3,5,8],
     "Square": [1,4,9,16,25],
@@ -67,7 +67,7 @@ for (key,value) in patterns {
 
 Functions use `func`:
 
-```
+```swift
 func greet(name: String, day: String) -> String{
     return "Hello \(name), today is \(day)."
 }
@@ -77,7 +77,7 @@ greet("Bob", "Tuesday")
 
 Tuples return multiple:
 
-```
+```swift
 func getGasPrices() -> (Double, Double, Double) {
     return (3.59, 3.69, 3.79)
 }
@@ -85,7 +85,7 @@ func getGasPrices() -> (Double, Double, Double) {
 
 We can take arbitrary numbers of arguments of a given type:
 
-```
+```swift
 func sumOf(numbers: Int...) -> Int {
     var sum = 0
     for number in numbers {
@@ -95,12 +95,13 @@ func sumOf(numbers: Int...) -> Int {
 }
 sumOf(42)
 sumOf(42,58,12)
+```
 
 **Note:** nest functions if you have a function you want to call inside another.
 
 Functions can also be passed and returned:
 
-```
+```swift
 // Return a function
 func makeIncrementer() -> (Int -> Int) {
     func addOne(number: Int) -> Int {
@@ -129,7 +130,7 @@ hasMatches(numbers, lessThanTen)
 
 **Closures** using brackets are great:
 
-```
+```swift
 numbers.map({
     (number: Int) -> Int in
     let result = 3 * number
@@ -140,7 +141,8 @@ numbers.map({ number in 3 * number })
 
 ## Objects and Classes
 Classes are pretty simple, using `init` and `deinit` for initializer and deinitializer:
-```
+
+```swift
 class NamedShape {
     var numberOfSides = 0
     var name: String
@@ -160,7 +162,7 @@ var shapeDescription = shape.simpleDescription()
 
 Inheritence uses the `override` keyword:
 
-```
+```swift
 class Square: NamedShape {
     var sideLength: Double 
 
@@ -185,7 +187,7 @@ test.simpleDescription()
 
 `get` and `set` can be placed on any property:
 
-```
+```swift
 class Square: NamedShape {
     var perimeter: Double {
         get {
@@ -205,7 +207,7 @@ class Square: NamedShape {
 
 Specifying a second value for within the function:
 
-```
+```swift
 class Counter {
     var count: Int = 0
     func incrementBy(amount: Int, numberOfTimes times: Int) {
@@ -216,7 +218,7 @@ class Counter {
 
 Using the `?` for optionals is very important:
 
-```
+```swift
 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional")
 let sideLength = optionalSquare?.sideLength
 ```
@@ -225,7 +227,7 @@ If the optional value is `nil`, everything after the `?` is ignored and the valu
 
 Enums are kinda simple:
 
-```
+```swift
 enum Rank: Int {
     case Ace = 1
     case Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten
@@ -253,7 +255,7 @@ Structs are similar to structs in other languages.
 
 **Protocols** are like interfaces: use the `protocol` key word:
 
-```
+```swift
 protocol ExampleProtocol {
     var simpleDescription: String { get }
     mutating func adjust()
@@ -272,7 +274,7 @@ class SimpleClass: ExampleProtocol {
 
 **Extensions** are like abstract classes: we can extend protocols to add additional functionality:
 
-```
+```swift
 extension Int: ExampleProtocol {
     var simpleDescription: String {
         return  "The number \(self)"
@@ -286,7 +288,7 @@ extension Int: ExampleProtocol {
 
 **Generics** are similar to other languages as well:
 
-```
+```swift
 func repeat<ItemType>(item: ItemType, times: Int) -> ItemType[] {
     var result = ItemType[]()
     for i in 0..times {
@@ -299,7 +301,7 @@ repeat("knock", 4)
 
 We can also use `where` in our generics to require certain types:
 
-```
+```swift
 func anyCommonElements <T, U where T: Sequence, U: Sequence> (lhs: T, rhs: U) -> Bool {
     for lhsItem in lhs {
         for rhsItem in rhs {
@@ -311,10 +313,11 @@ func anyCommonElements <T, U where T: Sequence, U: Sequence> (lhs: T, rhs: U) ->
     return false
 }
 anyCommonElements([1,2,3], [3])
+```
 
 **Subscripts** are shortcuts for accessing the member elements of a collection, list, or sequence. You use subscripts to set and retrieve values my index without needing separate methods. These include `get` and `set`.
 
-```
+```swift
 struct Matrix {
     let rows: Int, columns: Int
 
@@ -327,6 +330,10 @@ struct Matrix {
         }
     }
 }
+var matrix = Matrix(rows: 2, columns: 2)
+matrix[1,0]
+```
+
 
 
 
